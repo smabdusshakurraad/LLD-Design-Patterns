@@ -1,2 +1,5 @@
-package PACKAGE_NAME;public class MacButton {
+public class MacButton implements IButton{
+    public void press(){
+        System.out.println("Mac Button pressed ");
+    }
 }

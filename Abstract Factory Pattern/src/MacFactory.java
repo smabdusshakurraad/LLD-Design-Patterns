@@ -1,2 +1,11 @@
-package PACKAGE_NAME;public class MacFactory {
+public class MacFactory implements Ifactory{
+    @Override
+    public IButton createButton() {
+        return new MacButton();
+    }
+
+    @Override
+    public ITextBox createTextBox() {
+        return new MacTextBox();
+    }
 }

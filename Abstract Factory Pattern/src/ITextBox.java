@@ -1,2 +1,3 @@
-package PACKAGE_NAME;public interface ITextBox {
+public interface ITextBox {
+    void showText();
 }
