@@ -108,3 +108,59 @@ public class Main {
 * Trade-off (Awareness): The Client code must be aware of the different strategies to select the appropriate one.
 
 * Trade-off (Class Explosion): Increases the number of classes in your project. If you only have a couple of algorithms that rarely change, this pattern might be over-engineering.
+
+## Modern Java 8+ Implementation (Using Lambdas)
+
+With Java 8, if your strategy interface has only one abstract method, it becomes a `@FunctionalInterface`. This means you can pass behaviors directly using lambda expressions or method references, eliminating the boilerplate of creating multiple concrete classes.
+
+```java
+// 1. The Functional Strategy Interface
+@FunctionalInterface
+public interface CacheStrategy {
+    void write(String key, String payload);
+}
+
+// 2. The Context Class
+public class DataService {
+    private CacheStrategy cacheStrategy;
+
+    public void setCacheStrategy(CacheStrategy cacheStrategy) {
+        this.cacheStrategy = cacheStrategy;
+    }
+
+    public void processData(String key, String data) {
+        // Delegate to the injected strategy
+        cacheStrategy.write(key, data);
+    }
+}
+
+// 3. Client Code using Java 8 Lambdas
+public class Main {
+    public static void main(String[] args) {
+        DataService service = new DataService();
+
+        // Strategy 1: Local Memory (defined inline via lambda)
+        service.setCacheStrategy((key, payload) -> 
+            System.out.println("Writing '" + key + "' to local ConcurrentHashMap memory...")
+        );
+        service.processData("user:123", "{name: 'Abdus', role: 'admin'}");
+
+        // Strategy 2: Redis (defined inline via lambda)
+        service.setCacheStrategy((key, payload) -> 
+            System.out.println("Publishing '" + key + "' to distributed Redis cluster...")
+        );
+        service.processData("user:124", "{name: 'Alice', role: 'user'}");
+        
+        // Strategy 3: Method Reference (if logic is complex and extracted to another method)
+        // service.setCacheStrategy(ExternalCacheUtil::writeToMemcached);
+    }
+}
+```
+
+## Why use the Java 8 approach?
+
+* Less Boilerplate: You don't need to create InMemoryCacheStrategy.java, RedisCacheStrategy.java, etc.
+
+* Highly Concise: The behavior is defined exactly where it is used.
+
+* Perfect for Simple Algorithms: If your strategy is just a few lines of code, a lambda is much cleaner than a full class. (Note: If the strategy requires complex, multi-line logic or internal state, standard concrete classes are still preferred).
