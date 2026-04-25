@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Singelton Design Pattern.iml" filepath="$PROJECT_DIR$/Singelton Design Pattern.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Singleton Design Pattern.iml" filepath="$PROJECT_DIR$/Singleton Design Pattern.iml" />
     </modules>
   </component>
 </project>
