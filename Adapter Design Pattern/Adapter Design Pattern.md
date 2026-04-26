@@ -5,8 +5,6 @@ The **Adapter Pattern** is a structural design pattern that allows incompatible 
 
 ## Architecture Diagram
 
-Since GitHub supports Mermaid.js, here is the UML class diagram for the most common implementation (Object Adapter) that will render natively in your repository:
-
 ```mermaid
 classDiagram
     class Client {
@@ -91,11 +89,11 @@ public class SystemAdapter extends LegacySystem implements ComplexTarget {
 
 Benefits & Trade-offs
 
-    Single Responsibility Principle: Separates the data conversion code from the primary business logic.
+* Single Responsibility Principle: Separates the data conversion code from the primary business logic.
 
-    Open/Closed Principle: You can introduce new types of adapters without breaking the existing client code.
+* Open/Closed Principle: You can introduce new types of adapters without breaking the existing client code.
 
-    Trade-off (Complexity): Increases overall code complexity by introducing new interfaces and classes.
+* Trade-off (Complexity): Increases overall code complexity by introducing new interfaces and classes.
 
 
 ### Pure Class Adapter Example (Inheritance-Based)
@@ -187,6 +185,6 @@ public class Main {
     }
 }
 ```
-Key difference from Class Adapter: Notice that ObjectAdapter does not extend Adaptee. Instead, it declares a private Adaptee instance variable and requires it to be passed in through the constructor.
+**Key difference from Class Adapter: Notice that ObjectAdapter does not extend Adaptee. Instead, it declares a private Adaptee instance variable and requires it to be passed in through the constructor.**
 
 **In this repo we just implemented the example of Object Adapter **
